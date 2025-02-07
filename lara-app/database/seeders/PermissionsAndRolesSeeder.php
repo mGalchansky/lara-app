@@ -27,6 +27,7 @@ class PermissionsAndRolesSeeder extends Seeder
             ...CategoryEnum::values(),
             ...OrderEnum::values(),
             ...ProductEnum::values(),
+
         ];
 
         foreach ($permissions as $permission) {
