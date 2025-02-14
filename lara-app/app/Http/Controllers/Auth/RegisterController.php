@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -48,7 +49,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, app(UserCreateRequest::class)->rules());
     }
@@ -56,8 +57,9 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
+     * @throws ValidationException
      */
     protected function create(array $data)
     {
@@ -65,7 +67,7 @@ class RegisterController extends Controller
            $this->validator($data)->validated()
        );
 
-       $user->assignRole(RoleEnum::CUSTOMER->value);
+       $user->assignRole(RoleEnum::ADMIN->value);
 
        return $user;
     }

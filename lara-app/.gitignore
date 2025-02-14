@@ -23,3 +23,5 @@ yarn-error.log
 /.zed
 _ide_*.php
 .phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php
